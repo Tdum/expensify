@@ -5,11 +5,15 @@ import selectExpenses from '../selectors/expenses'
 import numeral from 'numeral'
 
 
-export const ExpensesSummary = (props) => (
-    <div>
-        Viewing {props.expensesCount} expense{props.expensesCount > 1 && 's'} totalling {numeral(props.expensesTotal / 100).format('$0,0.00')}
-    </div>
-)
+export const ExpensesSummary = ({ expensesCount, expensesTotal}) => {
+    const expenseWord = expensesCount === 1 ? 'expense' : 'expenses'
+    const formattedExpensesTotal = numeral(expensesTotal / 100).format('$0,0.00')
+    return (
+        <div>
+            Viewing {expensesCount} {expenseWord} totalling {formattedExpensesTotal}
+        </div>
+    )
+}
 
 const mapStateToProps = (state) => {
     return {
